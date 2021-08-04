@@ -8,6 +8,11 @@ struct AccentColorKey: EnvironmentKey {
   static let defaultValue: Color? = nil
 }
 
+struct EnvironmentValues {
+
+}
+
+
 extension EnvironmentValues {
   var accentColor: Color? {
     get { return nil }
