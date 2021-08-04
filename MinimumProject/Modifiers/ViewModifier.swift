@@ -13,18 +13,6 @@
 // limitations under the License.
 
 public protocol ViewModifier {
-  typealias Content = _ViewModifier_Content<Self>
-}
-
-public struct _ViewModifier_Content<Modifier> {
-  public let modifier: Modifier
-  public let view: AnyView
-
-  public init(modifier: Modifier, view: AnyView) {
-    self.modifier = modifier
-    self.view = view
-  }
-
 }
 
 public extension View {

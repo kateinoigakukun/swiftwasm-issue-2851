@@ -1,3 +1,3 @@
-public struct AnyView: PrimitiveView {
+public struct AnyView {
 }
 
