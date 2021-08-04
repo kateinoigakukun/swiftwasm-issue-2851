@@ -1,4 +1,4 @@
-// Copyright 2020 Tokamak contributors
+// Copyright 2020-2021 Tokamak contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,16 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-//  Created by Carson Katri on 7/16/20.
+//  Created by Carson Katri on 7/17/20.
 //
 
-protocol DynamicProperty {}
-public protocol EnvironmentKey {
-  associatedtype Value
-  static var defaultValue: Value { get }
+public protocol DynamicProperty {
+  mutating func update()
 }
 
+public extension DynamicProperty {
+  mutating func update() {}
+}
+// Copyright 2020 Tokamak contributors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
+/// A protocol that allows the conforming type to access values from the `EnvironmentValues`.
+/// (e.g. `Environment` and `EnvironmentObject`)
+///
+/// `EnvironmentValues` are injected in 2 places:
+/// 1. `View.makeMountedView`
+/// 2. `MountedHostView.update` when reconciling
+///
 protocol EnvironmentReader {
   mutating func setContent(from values: EnvironmentValues)
 }
@@ -55,171 +76,6 @@ protocol EnvironmentReader {
 }
 
 extension Environment: EnvironmentReader {}
-
-
-@propertyWrapper public struct AppStorage<Value>: DynamicProperty {
-  let provider: _StorageProvider?
-  @Environment(\._defaultAppStorage) var defaultProvider: _StorageProvider?
-  var unwrappedProvider: _StorageProvider {
-    provider ?? defaultProvider!
-  }
-
-  let key: String
-  let defaultValue: Value
-  let store: (_StorageProvider, String, Value) -> ()
-  let read: (_StorageProvider, String) -> Value?
-
-  public var wrappedValue: Value {
-    get {
-      read(unwrappedProvider, key) ?? defaultValue
-    }
-    nonmutating set {
-      store(unwrappedProvider, key, newValue)
-    }
-  }
-
-}
-
-public extension AppStorage {
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value == Bool
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2) }
-    read = { $0.read(key: $1) }
-  }
-
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value == Int
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2) }
-    read = { $0.read(key: $1) }
-  }
-
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value == Double
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2) }
-    read = { $0.read(key: $1) }
-  }
-
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value == String
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2) }
-    read = { $0.read(key: $1) }
-  }
-
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value: RawRepresentable, Value.RawValue == Int
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2.rawValue) }
-    read = {
-      guard let rawValue = $0.read(key: $1) as Int? else {
-        return nil
-      }
-      return Value(rawValue: rawValue)
-    }
-  }
-
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value: RawRepresentable, Value.RawValue == String
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2.rawValue) }
-    read = {
-      guard let rawValue = $0.read(key: $1) as String? else {
-        return nil
-      }
-      return Value(rawValue: rawValue)
-    }
-  }
-}
-
-public extension AppStorage where Value: ExpressibleByNilLiteral {
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value == Bool?
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2) }
-    read = { $0.read(key: $1) }
-  }
-
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value == Int?
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2) }
-    read = { $0.read(key: $1) }
-  }
-
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value == Double?
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2) }
-    read = { $0.read(key: $1) }
-  }
-
-  init(wrappedValue: Value, _ key: String, store: _StorageProvider? = nil)
-    where Value == String?
-  {
-    defaultValue = wrappedValue
-    self.key = key
-    provider = store
-    self.store = { $0.store(key: $1, value: $2) }
-    read = { $0.read(key: $1) }
-  }
-}
-
-/// The renderer is responsible for making sure a default is set at the root of the App.
-struct DefaultAppStorageEnvironmentKey: EnvironmentKey {
-  static let defaultValue: _StorageProvider? = nil
-}
-
-public extension EnvironmentValues {
-  @_spi(TokamakCore)
-  var _defaultAppStorage: _StorageProvider? {
-    get {
-      self[DefaultAppStorageEnvironmentKey.self]
-    }
-    set {
-      self[DefaultAppStorageEnvironmentKey.self] = newValue
-    }
-  }
-}
-
-public protocol View {
-}
-// MARKER(katei): Maybe affect the reproduced crash
-extension View {
-  func defaultAppStorage(_ store: _StorageProvider) -> some View {
-    environment(\._defaultAppStorage, store)
-  }
-}
-
 // Copyright 2020 Tokamak contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -234,98 +90,9 @@ extension View {
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-public struct EnvironmentValues: CustomStringConvertible {
-  public var description: String {
-    "EnvironmentValues: \(values.count)"
-  }
-
-  private var values: [ObjectIdentifier: Any] = [:]
-
-  public init() {}
-
-  public subscript<K>(key: K.Type) -> K.Value where K: EnvironmentKey {
-    get {
-      if let val = values[ObjectIdentifier(key)] as? K.Value {
-        return val
-      }
-      return K.defaultValue
-    }
-    set {
-      values[ObjectIdentifier(key)] = newValue
-    }
-  }
-
-  // subscript<B>(bindable: ObjectIdentifier) -> B? where B: ObservableObject {
-  //   get {
-  //     values[bindable] as? B
-  //   }
-  //   set {
-  //     values[bindable] = newValue
-  //   }
-  // }
-}
-
-struct IsEnabledKey: EnvironmentKey {
-  static let defaultValue = true
-}
-
-public extension EnvironmentValues {
-  var isEnabled: Bool {
-    get {
-      self[IsEnabledKey.self]
-    }
-    set {
-      self[IsEnabledKey.self] = newValue
-    }
-  }
-}
-
-// struct _EnvironmentValuesWritingModifier: ViewModifier, EnvironmentModifier {
-//   let environmentValues: EnvironmentValues
-// 
-//   func body(content: Content) -> some View {
-//     content
-//   }
-// 
-//   func modifyEnvironment(_ values: inout EnvironmentValues) {
-//     values = environmentValues
-//   }
-// }
-// 
-// public extension View {
-//   func environmentValues(_ values: EnvironmentValues) -> some View {
-//     modifier(_EnvironmentValuesWritingModifier(environmentValues: values))
-//   }
-// }
-// Copyright 2020 Tokamak contributors
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-//  Created by Carson Katri on 7/22/20.
-//
-
-public protocol _StorageProvider {
-  func store(key: String, value: Bool?)
-  func store(key: String, value: Int?)
-  func store(key: String, value: Double?)
-  func store(key: String, value: String?)
-
-  func read(key: String) -> Bool?
-  func read(key: String) -> Int?
-  func read(key: String) -> Double?
-  func read(key: String) -> String?
-
-  static var standard: _StorageProvider { get }
+public protocol EnvironmentKey {
+  associatedtype Value
+  static var defaultValue: Value { get }
 }
 
 protocol EnvironmentModifier {
@@ -348,12 +115,121 @@ public struct _EnvironmentKeyWritingModifier<Value>: ViewModifier, EnvironmentMo
   }
 }
 
-extension View {
+public extension View {
   func environment<V>(
     _ keyPath: WritableKeyPath<EnvironmentValues, V>,
     _ value: V
   ) -> some View {
     modifier(_EnvironmentKeyWritingModifier(keyPath: keyPath, value: value))
+  }
+}
+// Copyright 2020 Tokamak contributors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import CombineShim
+
+public struct EnvironmentValues: CustomStringConvertible {
+  public var description: String {
+    "EnvironmentValues: \(values.count)"
+  }
+
+  private var values: [ObjectIdentifier: Any] = [:]
+
+  public init() {}
+
+  public subscript<K>(key: K.Type) -> K.Value where K: EnvironmentKey {
+    get {
+      if let val = values[ObjectIdentifier(key)] as? K.Value {
+        return val
+      }
+      return K.defaultValue
+    }
+    set {
+      values[ObjectIdentifier(key)] = newValue
+    }
+  }
+
+  subscript<B>(bindable: ObjectIdentifier) -> B? where B: ObservableObject {
+    get {
+      values[bindable] as? B
+    }
+    set {
+      values[bindable] = newValue
+    }
+  }
+}
+
+// Copyright 2020 Tokamak contributors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+protocol ModifierContainer {
+  var environmentModifier: EnvironmentModifier? { get }
+}
+
+/// A value with a modifier applied to it.
+public struct ModifiedContent<Content, Modifier> {
+  @Environment(\.self) public var environment
+  public typealias Body = Never
+  public private(set) var content: Content
+  public private(set) var modifier: Modifier
+
+  public init(content: Content, modifier: Modifier) {
+    self.content = content
+    self.modifier = modifier
+  }
+}
+
+extension ModifiedContent: ModifierContainer {
+  var environmentModifier: EnvironmentModifier? { modifier as? EnvironmentModifier }
+}
+
+extension ModifiedContent: EnvironmentReader where Modifier: EnvironmentReader {
+  mutating func setContent(from values: EnvironmentValues) {
+    modifier.setContent(from: values)
+  }
+}
+
+extension ModifiedContent: View, ParentView where Content: View, Modifier: ViewModifier {
+  public var body: Body {
+    neverBody("ModifiedContent<View, ViewModifier>")
+  }
+
+  public var children: [AnyView] {
+    [AnyView(content)]
+  }
+}
+
+extension ModifiedContent: ViewModifier where Content: ViewModifier, Modifier: ViewModifier {
+  public func body(content: _ViewModifier_Content<Self>) -> Never {
+    neverBody("ModifiedContent<ViewModifier, ViewModifier>")
+  }
+}
+
+public extension ViewModifier {
+  func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> where T: ViewModifier {
+    .init(content: self, modifier: modifier)
   }
 }
 // Copyright 2020 Tokamak contributors
@@ -378,9 +254,15 @@ public protocol ViewModifier {
 
 public struct _ViewModifier_Content<Modifier>: View where Modifier: ViewModifier {
   public let modifier: Modifier
+  public let view: AnyView
 
-  public init(modifier: Modifier) {
+  public init(modifier: Modifier, view: AnyView) {
     self.modifier = modifier
+    self.view = view
+  }
+
+  public var body: AnyView {
+    view
   }
 }
 
@@ -397,18 +279,216 @@ public extension ViewModifier where Body == Never {
     )
   }
 }
+// Copyright 2018-2020 Tokamak contributors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//  Created by Max Desiatov on 16/10/2018.
+//
 
-extension Never: View {}
+/// Override `TokamakCore`'s default `Color` resolvers with a Renderer-specific one.
+/// You can override a specific color box
+/// (such as `_SystemColorBox`, or all boxes with `AnyColorBox`).
+///
+/// This extension makes all system colors red:
+///
+///     extension _SystemColorBox: AnyColorBoxDeferredToRenderer {
+///       public func deferredResolve(
+///         in environment: EnvironmentValues
+///       ) -> AnyColorBox.ResolvedValue {
+///         return .init(
+///           red: 1,
+///           green: 0,
+///           blue: 0,
+///           opacity: 1,
+///           space: .sRGB
+///         )
+///       }
+///     }
+///
 
-public struct ModifiedContent<Content, Modifier>: View {
-  @Environment(\.self) public var environment
-  public typealias Body = Never
-  public private(set) var content: Content
-  public private(set) var modifier: Modifier
 
-  public init(content: Content, modifier: Modifier) {
-    self.content = content
-    self.modifier = modifier
+public struct Color: Hashable, Equatable {
+}
+
+struct AccentColorKey: EnvironmentKey {
+  static let defaultValue: Color? = nil
+}
+
+public extension EnvironmentValues {
+  var accentColor: Color? {
+    get {
+      self[AccentColorKey.self]
+    }
+    set {
+      self[AccentColorKey.self] = newValue
+    }
   }
 }
 
+public extension View {
+  func accentColor(_ accentColor: Color?) -> some View {
+    environment(\.accentColor, accentColor)
+  }
+}
+// Copyright 2020-2021 Tokamak contributors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//  Created by Max Desiatov on 08/04/2020.
+//
+
+/// A type-erased view.
+public struct AnyView: PrimitiveView {
+  /// The type of the underlying `view`.
+  let type: Any.Type
+
+  /** The name of the unapplied generic type of the underlying `view`. `Button<Text>` and
+   `Button<Image>` types are different, but when reconciling the tree of mounted views
+   they are treated the same, thus the `Button` part of the type (the type constructor)
+   is stored in this property.
+   */
+  let typeConstructorName: String
+
+  /// The actual `View` value wrapped within this `AnyView`.
+  var view: Any
+
+  /** Type-erased `body` of the underlying `view`. Needs to take a fresh version of `view` as an
+   argument, otherwise it captures an old value of the `body` property.
+   */
+  let bodyClosure: (Any) -> AnyView
+
+  /** The type of the `body` of the underlying `view`. Used to cast the result of the applied
+   `bodyClosure` property.
+   */
+  let bodyType: Any.Type
+
+  public init<V>(_ view: V) where V: View {
+    if let anyView = view as? AnyView {
+      self = anyView
+    } else {
+      type = V.self
+
+      typeConstructorName = "" // TokamakCore.typeConstructorName(type)
+
+      bodyType = V.Body.self
+      self.view = view
+      if view is ViewDeferredToRenderer {
+        bodyClosure = {
+          let deferredView: Any
+          deferredView = $0
+          // swiftlint:disable:next force_cast
+          return (deferredView as! ViewDeferredToRenderer).deferredBody
+        }
+      } else {
+        // swiftlint:disable:next force_cast
+        bodyClosure = { AnyView(($0 as! V).body) }
+      }
+    }
+  }
+}
+
+public func mapAnyView<T, V>(_ anyView: AnyView, transform: (V) -> T) -> T? {
+  guard let view = anyView.view as? V else { return nil }
+
+  return transform(view)
+}
+
+extension AnyView: ParentView {
+  @_spi(TokamakCore)
+  public var children: [AnyView] {
+    (view as? ParentView)?.children ?? []
+  }
+}
+
+public struct _AnyViewProxy {
+  public var subject: AnyView
+
+  public init(_ subject: AnyView) { self.subject = subject }
+
+  public var type: Any.Type { subject.type }
+  public var view: Any { subject.view }
+}
+// Copyright 2020 Tokamak contributors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//  Created by Max Desiatov on 07/04/2020.
+//
+
+public protocol View {
+  associatedtype Body: View
+
+  var body: Self.Body { get }
+}
+
+public extension Never {
+  @_spi(TokamakCore)
+  var body: Never {
+    fatalError()
+  }
+}
+
+extension Never: PrimitiveView {}
+
+/// A `View` that offers primitive functionality, which renders its `body` inaccessible.
+public protocol PrimitiveView: View where Body == Never {}
+
+public extension PrimitiveView {
+  @_spi(TokamakCore)
+  var body: Never {
+    neverBody(String(reflecting: Self.self))
+  }
+}
+
+/// A `View` type that renders with subviews, usually specified in the `Content` type argument
+public protocol ParentView {
+  var children: [AnyView] { get }
+}
+
+/// A `View` type that is not rendered but "flattened", rendering all its children instead.
+protocol GroupView: ParentView {}
+
+/** The distinction between "host" (truly primitive) and "composite" (that have meaningful `body`)
+ views is made in the reconciler in `TokamakCore` based on their `body` type, host views have body
+ type `Never`. `ViewDeferredToRenderer` allows renderers to override that per-platform and render
+ host views as composite by providing their own `deferredBody` implementation.
+ */
+public protocol ViewDeferredToRenderer {
+  var deferredBody: AnyView { get }
+}
+
+/// Calls `fatalError` with an explanation that a given `type` is a primitive `View`
+public func neverBody(_ type: String) -> Never {
+  fatalError("\(type) is a primitive `View`, you're not supposed to access its `body`.")
+}
