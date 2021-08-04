@@ -12,29 +12,3 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-protocol ModifierContainer {
-  var environmentModifier: EnvironmentModifier? { get }
-}
-
-/// A value with a modifier applied to it.
-public struct ModifiedContent<Content, Modifier> {
-  @Environment(\.self) public var environment
-  public typealias Body = Never
-  public private(set) var content: Content
-  public private(set) var modifier: Modifier
-
-  public init(content: Content, modifier: Modifier) {
-    self.content = content
-    self.modifier = modifier
-  }
-}
-
-extension ModifiedContent: ModifierContainer {
-  var environmentModifier: EnvironmentModifier? { modifier as? EnvironmentModifier }
-}
-
-extension ModifiedContent: EnvironmentReader where Modifier: EnvironmentReader {
-  mutating func setContent(from values: EnvironmentValues) {
-    modifier.setContent(from: values)
-  }
-}

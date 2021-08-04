@@ -17,23 +17,13 @@ public protocol EnvironmentKey {
   static var defaultValue: Value { get }
 }
 
-protocol EnvironmentModifier {
-  func modifyEnvironment(_ values: inout EnvironmentValues)
-}
-
-public struct _EnvironmentKeyWritingModifier<Value>: ViewModifier, EnvironmentModifier {
+public struct _EnvironmentKeyWritingModifier<Value> {
   public let keyPath: WritableKeyPath<EnvironmentValues, Value>
   public let value: Value
 
   public init(keyPath: WritableKeyPath<EnvironmentValues, Value>, value: Value) {
     self.keyPath = keyPath
     self.value = value
-  }
-
-  public typealias Body = Never
-
-  func modifyEnvironment(_ values: inout EnvironmentValues) {
-    values[keyPath: keyPath] = value
   }
 }
 
