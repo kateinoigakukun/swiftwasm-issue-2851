@@ -84,10 +84,6 @@
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/AnyView.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Buttons/Button.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Buttons/Link.swift.o
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Containers/DisclosureGroup.swift.o
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Containers/ForEach.swift.o
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Containers/Group.swift.o
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Containers/OutlineGroup.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Containers/TupleView.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Image.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Layout/GeometryReader.swift.o
@@ -100,7 +96,6 @@
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Navigation/NavigationLink.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Navigation/NavigationView.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Selectors/DatePicker.swift.o
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Selectors/Picker.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Selectors/Slider.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Selectors/Toggle.swift.o
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/wasm32-unknown-wasi/release/TokamakCore.build/Views/Spacers/Divider.swift.o

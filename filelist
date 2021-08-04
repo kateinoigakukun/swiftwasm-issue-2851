@@ -84,10 +84,6 @@
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/AnyView.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Buttons/Button.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Buttons/Link.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/DisclosureGroup.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/ForEach.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/Group.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/OutlineGroup.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/TupleView.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Image.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Layout/GeometryReader.swift
@@ -100,7 +96,6 @@
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Navigation/NavigationLink.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Navigation/NavigationView.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Selectors/DatePicker.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Selectors/Picker.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Selectors/Slider.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Selectors/Toggle.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Spacers/Divider.swift
