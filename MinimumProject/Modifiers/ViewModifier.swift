@@ -14,11 +14,9 @@
 
 public protocol ViewModifier {
   typealias Content = _ViewModifier_Content<Self>
-  associatedtype Body: View
-  func body(content: Content) -> Self.Body
 }
 
-public struct _ViewModifier_Content<Modifier>: View where Modifier: ViewModifier {
+public struct _ViewModifier_Content<Modifier> {
   public let modifier: Modifier
   public let view: AnyView
 
@@ -27,21 +25,10 @@ public struct _ViewModifier_Content<Modifier>: View where Modifier: ViewModifier
     self.view = view
   }
 
-  public var body: AnyView {
-    view
-  }
 }
 
 public extension View {
-  func modifier<Modifier>(_ modifier: Modifier) -> ModifiedContent<Self, Modifier> {
-    .init(content: self, modifier: modifier)
+  func modifier<Modifier>(_ modifier: Modifier) {
   }
 }
 
-public extension ViewModifier where Body == Never {
-  func body(content: Content) -> Body {
-    fatalError(
-      "\(Self.self) is a primitive `ViewModifier`, you're not supposed to run `body(content:)`"
-    )
-  }
-}

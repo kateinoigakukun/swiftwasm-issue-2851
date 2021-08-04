@@ -38,25 +38,3 @@ extension ModifiedContent: EnvironmentReader where Modifier: EnvironmentReader {
     modifier.setContent(from: values)
   }
 }
-
-extension ModifiedContent: View, ParentView where Content: View, Modifier: ViewModifier {
-  public var body: Body {
-    neverBody("ModifiedContent<View, ViewModifier>")
-  }
-
-  public var children: [AnyView] {
-    [AnyView(content)]
-  }
-}
-
-extension ModifiedContent: ViewModifier where Content: ViewModifier, Modifier: ViewModifier {
-  public func body(content: _ViewModifier_Content<Self>) -> Never {
-    neverBody("ModifiedContent<ViewModifier, ViewModifier>")
-  }
-}
-
-public extension ViewModifier {
-  func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> where T: ViewModifier {
-    .init(content: self, modifier: modifier)
-  }
-}

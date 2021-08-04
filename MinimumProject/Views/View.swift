@@ -16,9 +16,6 @@
 //
 
 public protocol View {
-  associatedtype Body: View
-
-  var body: Self.Body { get }
 }
 
 public extension Never {
@@ -31,7 +28,7 @@ public extension Never {
 extension Never: PrimitiveView {}
 
 /// A `View` that offers primitive functionality, which renders its `body` inaccessible.
-public protocol PrimitiveView: View where Body == Never {}
+public protocol PrimitiveView {}
 
 public extension PrimitiveView {
   @_spi(TokamakCore)
@@ -42,7 +39,6 @@ public extension PrimitiveView {
 
 /// A `View` type that renders with subviews, usually specified in the `Content` type argument
 public protocol ParentView {
-  var children: [AnyView] { get }
 }
 
 /// A `View` type that is not rendered but "flattened", rendering all its children instead.

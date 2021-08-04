@@ -56,7 +56,7 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-  func accentColor(_ accentColor: Color?) -> some View {
+  func accentColor(_ accentColor: Color?) {
     environment(\.accentColor, accentColor)
   }
 }

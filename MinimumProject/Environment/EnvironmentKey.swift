@@ -41,7 +41,7 @@ public extension View {
   func environment<V>(
     _ keyPath: WritableKeyPath<EnvironmentValues, V>,
     _ value: V
-  ) -> some View {
+  ) {
     modifier(_EnvironmentKeyWritingModifier(keyPath: keyPath, value: value))
   }
 }
