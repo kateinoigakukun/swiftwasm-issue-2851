@@ -13,18 +13,10 @@
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Environment/EnvironmentKey.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Environment/EnvironmentObject.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Environment/EnvironmentValues.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/AppearanceActionModifier.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/Effects/ClipEffect.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/Effects/GeometryEffect.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/Effects/RotationEffect.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/FlexFrameLayout.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/FrameLayout.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/LifecycleModifier.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/ModifiedContent.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/Navigation.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/PaddingLayout.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/RedactionReasons.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/ShadowLayout.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/StyleModifiers.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/ViewModifier.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/ZIndexModifier.swift
@@ -72,7 +64,6 @@
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Stubs/CGStubs.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Stubs/UIColor.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Styles/ButtonStyle.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Styles/ListStyle.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Styles/NavigationLinkStyle.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Styles/OutlineGroupStyle.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Styles/PickerStyle.swift
@@ -96,9 +87,7 @@
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/DisclosureGroup.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/ForEach.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/Group.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/List.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/OutlineGroup.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/Section.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Containers/TupleView.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Image.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Views/Layout/GeometryReader.swift
