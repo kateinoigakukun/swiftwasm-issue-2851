@@ -1,17 +1,12 @@
-public protocol View {
-}
+public protocol View {}
 
-public struct Color {
-}
+public struct Color {}
 
 struct AccentColorKey: EnvironmentKey {
-  static let defaultValue: Color? = nil
+  typealias Value = Color?
 }
 
-struct EnvironmentValues {
-
-}
-
+struct EnvironmentValues {}
 
 extension EnvironmentValues {
   var accentColor: Color? {
@@ -22,7 +17,6 @@ extension EnvironmentValues {
 
 public protocol EnvironmentKey {
     associatedtype Value
-    static var defaultValue: Value { get }
 }
 
 struct _EnvironmentKeyWritingModifier<Value> {
@@ -37,7 +31,6 @@ extension View {
     _EnvironmentKeyWritingModifier(keyPath: keyPath)
   }
 }
-
 
 public extension View {
   func accentColor(_ accentColor: Color?) {
