@@ -8,10 +8,6 @@
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/ModifiedContent.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Modifiers/ViewModifier.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Preferences/PreferenceKey.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Preferences/_PreferenceActionModifier.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Preferences/_PreferenceTransformModifier.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Preferences/_PreferenceWritingModifier.swift
-/Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/PreviewProvider.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Reflection/Layouts/ExistentialContainter.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Reflection/Layouts/FieldDescriptor.swift
 /Users/kateinoigakukun/.ghq/github.com/kateinoigakukun/swiftwasm-issue-2851/.build/checkouts/Sources/TokamakCore/Reflection/Layouts/ProtocolTypeContainer.swift
