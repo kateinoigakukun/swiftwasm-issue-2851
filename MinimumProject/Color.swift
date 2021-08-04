@@ -1,5 +1,4 @@
-
-public struct Color: Hashable, Equatable {
+public struct Color {
 }
 
 struct AccentColorKey: EnvironmentKey {
