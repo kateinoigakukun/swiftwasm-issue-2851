@@ -1,7 +1,7 @@
 DynamicProperty.swift
 EnvironmentKey.swift
 EnvironmentValues.swift
-Modifiers/ModifiedContent.swift
-Modifiers/ViewModifier.swift
+ModifiedContent.swift
+ViewModifier.swift
 Tokens/Color.swift
 View.swift
