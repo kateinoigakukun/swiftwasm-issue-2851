@@ -3,5 +3,5 @@ EnvironmentKey.swift
 EnvironmentValues.swift
 ModifiedContent.swift
 ViewModifier.swift
-Tokens/Color.swift
+Color.swift
 View.swift
